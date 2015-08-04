@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Index</title>
+			        <meta charset="utf-8">
+			        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+			
+			        <link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">
+			        <link rel="stylesheet" href="css/jquery.mobile.external-png-1.4.2.min.css">
+			        <link rel="stylesheet" href="css/jquery.mobile.icons-1.4.2.min.css">
+			        <link rel="stylesheet" href="css/jquery.mobile.inline-png-1.4.2.min.css">
+			        <link rel="stylesheet" href="css/jquery.mobile.inline-svg-1.4.2.min.css">
+			        <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.2.min.css">
+			        <link rel="stylesheet" href="css/jquery.mobile.theme-1.4.2.min.css">
+			
+			        <script src="js/libs/jquery-1.11.0.min.js"></script>
+			        <script src="js/libs/jquery.mobile-1.4.2.min.js"></script>
+			       
+			        <script src="js/create_db.js" type="text/javascript" ></script>
+        
+                                <script type="text/javascript">
+                                    function inser_classe()
+                                    {
+        	    
+        	  				var libelle_classe=document.getElementById("nom_classe").value.toString();
+        	  				var id_classe;
+        	  				db.transaction(function (tx)
+        	  				{
+        	  					tx.executeSql('insert into classe(libelle ) \n\
+        	  					values("'+libelle_classe+'")');
+                                                
+        
+        
+                   });
+                   db.transaction(function (tx1)
+        	  				{  tx1.executeSql('select id from classe \n\
+                       where libelle ="'+libelle_classe+'"', [], function(tx1, rs){
+         
+            var row = rs.rows.length;
+            id_classe=row['id'];
+                         
+         
+            
+        
+         
+         alert('id_classe');}
+);});
+                                        
+                                         $("#x").listview('refresh');
+                                        location.href="mesclasses.html"
+        				
+    
+    
+    }
+                                        
+                                </script>
+                                
+                                
+        <script  type="text/javascript">
+//function logout(){
+//                      sessionStorage.clear();   
+//                     }
+                                        
+        </script>
+      
+    </head>
+  
+    
+    <body>
+
+        <div data-role= "page" id="main"  data-theme="a"  >
+            <div data-role= "header"  style="text-align: left;">
+                <h1>Mes classes</h1>
+                <a href="#option" data-icon="gear" data-iconpos="notext" data-rel= "dialog"  data-trasition= "pop" >option</a>
+                <a href="#new_classe" data-icon="plus" data-rel= "dialog"  data-trasition= "pop" data-mini= "true" data-iconpos="notext">Ajouter classe</a>
+            </div>	
+            <div data-role= "content" >
+                <ul data-role="listview" data-split-icon="delete" data-split-theme="a" data-inset="true" id="x">
+                 <script type="text/javascript">
+                        var result;
+                        var html = "";
+                        var id_ens = sessionStorage.userid;
+                        alert(id_ens);
+                       
+                                        db.transaction(function (tx) {
+                                           tx.executeSql("Select * from classe, etude\n\
+                                   where classe.id=etude.classe and etude.enseignant= "+id_ens, [], function(tx, rs){
+
+                                              for(var i=0; i<rs.rows.length; i++) {
+                                                 var row = rs.rows.item(i);
+                                                 result=row['libelle'];
+                                                             //alert(result);       
+                            html +=   '<li><a href="mescours.html" onclick="saveidclasse()"> ';
+                            html +=      '<h2>'+result+'</h2>';
+                            html +=   '<p>des informations  </p></a><a href="#delete" data-rel="popup" data-position-to="window" data-transition="pop" >supprimer</a></li>';
+
+                             }
+                                 $("#x").append (html);
+                             $("#x").listview('refresh');
+                          });
+                       });
+
+                </script>
+                </ul>
+
+                <div data-role="popup" id="delete" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
+                    <h3>Supprimer ?</h3>
+                <p>Voulez vous supprimer cette classe de votre liste.</p>
+                    <a href="#" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-b ui-icon-check ui-btn-icon-left ui-btn-inline ui-mini">Sûr !</a>
+                    <a href="#" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini">Annuler</a>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div data-role= "page" id="new_classe" >
+            <div data-role= "header" data-theme= "b">
+                <h4>Nouvelle classe</h4>
+            </div>	
+            <div data-role= "content" data-theme= "d">
+
+                <input type="text"  id="nom_classe" placeholder="Nom du classe:" value="">
+                <center>
+                    <button type="button" class="ui-btn ui-btn-inline" id="ajout_classe_btn" onclick="inser_classe()">Ajouterssss</button>
+                </center>
+            </div>	
+        </div>
+
+        
+        
+        <div data-role= "page" id="option" >
+            <div data-role= "header" data-theme= "b">
+                <h4>Parameters</h4>
+                <a href="#" data-rel="back" data-icon="back" data-iconpos="notext">retour</a>
+            </div>	
+            <div data-role= "content" data-theme= "d">
+                
+                <center><a href="login.html"  class="ui-btn ui-btn-inline" onclick="logout()">Déconnecter</a></center>
+                
+               
+            </div>	
+        </div>
+    </body>
+    
+   
+</html>
