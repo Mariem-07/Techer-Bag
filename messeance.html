@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html>
+   
+    <head>
+        <title>Mes seances</title>
+				        <meta charset="utf-8">
+				        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+				        
+				            <link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">
+				            <link rel="stylesheet" href="css/jquery.mobile.external-png-1.4.2.min.css">
+				            <link rel="stylesheet" href="css/jquery.mobile.icons-1.4.2.min.css">
+				            <link rel="stylesheet" href="css/jquery.mobile.inline-png-1.4.2.min.css">
+				            <link rel="stylesheet" href="css/jquery.mobile.inline-svg-1.4.2.min.css">
+				            <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.2.min.css">
+				            <link rel="stylesheet" href="css/jquery.mobile.theme-1.4.2.min.css">
+				        
+				            <script src="js/libs/jquery-1.11.0.min.js"></script>
+				            <script src="js/libs/jquery.mobile-1.4.2.min.js"></script>
+				            
+				            <script src="js/create_db.js" type="text/javascript" ></script>
+                                            <script type="text/javascript" >
+                                                function new_seance()
+                                                {
+                                                   alert("salut") 
+                                                }
+                                                
+                                            </script>
+    </head>
+    <body>
+		<div id="main" data-role="page">
+			<div id="h" data-role="header">
+				<a href="mescours.html" class="ui-btn ui-icon-back ui-btn-icon-left" >Retour</a>
+				<a href="#new_seance" class="ui-btn ui-icon-plus ui-btn-icon-left" >Ajouter séance</a>
+				<h5>Mes séances</h5>
+				
+			</div>
+			
+			<div id="c" data-role="content">
+				
+				<ul data-role="listview" data-split-icon="delete" data-split-theme="a" data-inset="true">
+				    <li><a href="maseance.html">
+				    <h2>lun. 9 Juin 2015</h2>
+				    <p>TI 12, Dep. Informatique</p></a>
+				        <a href="#delete" data-rel="popup" data-position-to="window" data-transition="pop">supprimer</a>
+				    </li>
+				    <li><a href="#">
+				    <h2>mar. 13 Avril 2015</h2>
+				    <p>Lab 07, Dep. Genie mécanique </p></a>
+				        <a href="#delete" data-rel="popup" data-position-to="window" data-transition="pop">supprimer</a>
+				    </li>
+				    <li><a href="#">
+				    <h2>ven. 6 Juin 2015</h2>
+				    <p>GS 2, Dep. Informatique</p></a>
+				        <a href="#delete" data-rel="popup" data-position-to="window" data-transition="pop">supprimer</a>
+				    </li>
+				</ul>
+				
+				<div data-role="popup" id="delete" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
+				    <h3>Supprimer ?</h3>
+				<p>Voulez vous supprimer cette séance de votre liste.</p>
+				    <a href="" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-b ui-icon-check ui-btn-icon-left ui-btn-inline ui-mini">Oui</a>
+				    <a href="" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini">Annuler</a>
+				</div>
+			
+			</div>
+		
+		</div>
+		<div id="new_seance" data-role="page">
+			<div id="h" data-role="header">
+				<a href="#main" class="ui-btn ui-icon-back ui-btn-icon-left "  >Retour</a>
+				<h4>Nouvelle séance</h4>
+			
+			
+			</div>
+			
+			
+			<div id="c" data-role="content">
+				<input type="date" id="date" value="" placeholder="taper la date">
+				<input type="text" id="sale" value="" placeholder="sale :">
+				<input type="text" id="departement" value="" placeholder="département :">
+				<br />
+                                <center><button data-icon="check" data-inline="true" onclick="new_seance()">Valider</button></center>
+			</div>
+		
+		</div>
+    </body>
+</html>
