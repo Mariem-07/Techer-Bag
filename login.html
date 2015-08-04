@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>login</title>
+        
+			               <meta charset="utf-8">
+			               <meta name="viewport" content="width=device-width, initial-scale=1"> 
+			       
+			               <link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">
+			               <link rel="stylesheet" href="css/jquery.mobile.external-png-1.4.2.min.css">
+			               <link rel="stylesheet" href="css/jquery.mobile.icons-1.4.2.min.css">
+			               <link rel="stylesheet" href="css/jquery.mobile.inline-png-1.4.2.min.css">
+			               <link rel="stylesheet" href="css/jquery.mobile.inline-svg-1.4.2.min.css">
+			               <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.2.min.css">
+			               <link rel="stylesheet" href="css/jquery.mobile.theme-1.4.2.min.css">
+			       
+			               <script src="js/libs/jquery-1.11.0.min.js"></script>
+			               <script src="js/libs/jquery.mobile-1.4.2.min.js"></script>
+			               
+			               <script src="js/create_db.js" type="text/javascript" ></script>
+			               
+               <script  type="text/javascript" >
+                  
+                       
+                       
+                  
+                   function inscr(){
+                       
+                     
+                     var db = openDatabase("teach_db_local", "1.0", "local teachdb", 10000000);
+                     var logi=document.getElementById("login1").value.toString();
+                     var pass=document.getElementById("password1").value.toString();
+                     var nom=document.getElementById("nom").value.toString();
+                     var pr=document.getElementById("prenom").value.toString();
+                     var tel=document.getElementById("tel").value.toString();
+                     var cin=document.getElementById("cin").value.toString();
+                     var mail=document.getElementById("email").value.toString();
+                    
+                     var cin_exist;
+        
+                        db.transaction(function (tx){
+                      tx.executeSql('insert into enseignant(nom, prenom, num_tel, num_cin, e_mail, login, password ) \n\
+                                           values( "'+nom+'",  "'+pr+'",  "'+tel+'",  "'+mail+'",  "'+tel+'",  "'+logi+'", "'+pass+'"  )');
+
+                                                       }
+                                       );
+                                                                           
+                                 }
+                    function connect(){
+                     db.transaction(function (tx) {
+                             var l=document.getElementById("login").value.toString();
+                             var p=document.getElementById("password").value.toString();
+
+
+          tx.executeSql('select id from enseignant\n\
+                                            where login="'+l+'" and password="'+p+'"', [], function(tx, rs){
+          //  var row = rs.rows.length;
+
+                   if (rs.rows.length==0)
+                   alert("Verifier vos informations");
+                   else{ 
+                        var row = rs.rows.item(0);
+
+                        sessionStorage.userid=row['id'];
+                        location.href="mesclasses.html";
+                       //alert ("succee"+sessionStorage.userid);
+                       }
+                  //  var row = rs.rows.item(i);
+              });
+           });   
+                        }
+
+               </script>
+               
+    
+    </head>
+    
+    <body>
+        <div data-role="page" id="main">
+        	<div id="main_c" data-role="content">
+        	
+        	<center>
+                            <img src="img/login.png" alt=""  height="220"/><br />
+                            <input type="text" name="text-basic" id="login" value="" placeholder="Utilisateur">
+                            <input type="password" name="text-basic" id="password" placeholder="Mot de passe" value="">
+                            <br />
+                            <button class="ui-btn ui-btn-inline" onclick="connect()" >Se connecter</button>
+                            <br />
+                            <br />
+                            <br />
+                            <a href="#sign_in" class="ui-btn ui-btn-inline">S'inscrire</a>
+        	</center>
+        	</div>
+        </div>
+        <div data-role="page" id="sign_in">
+        	<div data-role="header">
+	        	<h4>Inscription</h4>
+	        	<a href="#main" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-notext">retour</a>
+        	</div>
+        	<div data-role="content">
+        		<center>
+                            <form name="f1">
+                                <input type="text" name="text-basic" id="login1" value="" placeholder="Nom d'utilisateur">
+                                <input type="password" name="text-basic" id="password1" value="" placeholder="Mot de passe">
+                                <input type="text" name="text-basic" id="nom" value="" placeholder="Nom de l'enseignant">
+                                <input type="text" name="text-basic" id="prenom" value="" placeholder="Prenom de l'enseignant">
+                                <input type="text" name="text-basic" id="tel" value="" placeholder="Nº Tel">
+                                <input type="text" name="text-basic" id="cin" value="" placeholder="Nº Cin">
+                                <input type="text" name="text-basic" id="email" value="" placeholder="@ e-mail">
+                                <div>
+                                    <button type="button" class="ui-btn ui-btn-inline" id="sign_in" onclick="inscr()">S'inscrire</button>
+                                </div>
+                            </form>
+	        	</center>
+        	</div>
+        </div>
+        
+    </body>
+</html>
