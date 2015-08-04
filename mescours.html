@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Mes cours</title>
+       					<meta charset="utf-8">
+                       <meta name="viewport" content="width=device-width, initial-scale=1"> 
+               
+                       <link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css">
+                       <link rel="stylesheet" href="css/jquery.mobile.external-png-1.4.2.min.css">
+                       <link rel="stylesheet" href="css/jquery.mobile.icons-1.4.2.min.css">
+                       <link rel="stylesheet" href="css/jquery.mobile.inline-png-1.4.2.min.css">
+                       <link rel="stylesheet" href="css/jquery.mobile.inline-svg-1.4.2.min.css">
+                       <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.2.min.css">
+                       <link rel="stylesheet" href="css/jquery.mobile.theme-1.4.2.min.css">
+               
+                       <script src="js/libs/jquery-1.11.0.min.js"></script>
+                       <script src="js/libs/jquery.mobile-1.4.2.min.js"></script>
+                       
+                       <script src="js/create_db.js" type="text/javascript" ></script>
+                       
+        
+    </head>
+    <body>
+        <div id="main" data-role="page">
+        	
+        	<div id="h" data-role="header">
+        	<a href="mesclasses.html" class="ui-btn ui-icon-back ui-btn-icon-left" >retour</a>
+        	<a href="#matiere" class="ui-btn ui-icon-bullets ui-btn-icon-left">matière</a>
+        	<h4>DSI 31</h4>
+        	</div>
+        	
+        	<div id="c" data-role="content">
+        	
+                    <ul data-role="listview" data-split-icon="delete" data-split-theme="a" data-inset="true" id="x">
+                        
+                        <li><a href="mescours.html" onclick="saveidclasse()"> <h2>JAVA pour DSI 31</h2>
+                                <p>des informations  </p></a><a href="#delete" data-rel="popup" data-position-to="window" data-transition="pop" >supprimer</a>
+                        </li>
+                         
+                        <li><a href="mescours.html" onclick="saveidclasse()"> <h2>UML pour DSI 31</h2>
+                                <p>des informations  </p></a><a href="#delete" data-rel="popup" data-position-to="window" data-transition="pop" >supprimer</a>
+                        </li>
+                    </ul>
+                     
+                    <a href="#new_cours" class="ui-btn ui-icon-plus ui-btn-icon-right" >Affecter une matière à ma classe</a>
+        	
+        	</div>
+        </div>
+        
+        
+        
+        <div id="matiere" data-role="page">
+        	<div id="h" data-role=header >
+        	<a href="#main" class="ui-btn ui-icon-back ui-btn-icon-left">retour</a>
+        	<a href="#new_matiere" class="ui-btn ui-icon-plus ui-btn-icon-left" >Ajouter matière</a>
+        	<h4>Les matières</h4>
+        	</div>
+        	<div id="c" data-role="content">
+        	
+        	
+        	
+        	
+        	
+        	
+        	<ul data-role="listview" data-filter="true" data-filter-placeholder="Recherche !" data-inset="true">
+        	    <li data-icon="delete"><a href="#delete" data-rel="popup" data-position-to="window" data-transition="pop">JAVA</a></li>
+        	    <li data-icon="delete"><a href="#delete" data-rel="popup" data-position-to="window" data-transition="pop">ASD</a></li>
+        	    <li data-icon="delete"><a href="#delete" data-rel="popup" data-position-to="window" data-transition="pop">Systeme logique</a></li>
+        	    <li data-icon="delete"><a href="#delete" data-rel="popup" data-position-to="window" data-transition="pop">Architecture</a></li>
+        	    <li data-icon="delete"><a href="#delete" data-rel="popup" data-position-to="window" data-transition="pop">J2EE</a>
+        	    </li>
+        	</ul>
+        	
+        	
+        	
+        	<div data-role="popup" id="delete" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
+        	    <h3>Supprimer ?</h3>
+        	<p>Voulez vous supprimer cette matiere de votre liste.</p>
+        	    <a href="#" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-b ui-icon-check ui-btn-icon-left ui-btn-inline ui-mini">Sur !</a>
+        	    <a href="#" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini">Annuler</a>
+        	</div>
+        	
+        	
+        	
+        	
+        	
+        	
+        	
+        	</div>
+        </div>
+    	
+    	<div id="new_matiere" data-role="page">
+    		<div id="h" data-role="header">
+    		<a href="#matiere" class="ui-btn ui-icon-back ui-btn-icon-left">retour</a>
+    		<h4>Nouvelle matiere</h4>
+    		
+    		</div>
+    		
+    		<div id="c" data-role="content">
+    		
+    		<input type="text" id="libelle_new_mat" placeholder="Tapper le nom de la matière :" value="">
+    		<input type="text" id="coef_new_mat" placeholder="Tapper son coeficient :" value="">
+    		
+    		<button>Ajouter</button>
+    		
+    		
+    		</div>
+    		
+    	
+    	</div>
+    	<div id="new_cours" data-role="page">
+	    	<div id="h" data-role="header">
+	    	<a href="#main" class="ui-btn ui-icon-back ui-btn-icon-left">retour</a>
+	    	<h4>nouveau cours</h4>
+	    	</div>
+	    	
+	    	<div id="c" data-role="content">
+	    	<input type="text"  id="libelle_new_cours" value="" placeholder="Entrer le nom du cours">
+	    	
+	    	<label for="select-choice-matiere" class="select">Selectionner la matiere de votre cour:</label>
+	    	<select  id="select-choice-matiere" data-native-menu="false">
+	    	    <option>Mes matieres</option>
+	    	    <option value="val1">JAVA</option>
+	    	    <option value="val2">UML</option>
+	    	    <option value="val3">ASD</option>
+	    	    <option value="val4">Architectures des ordinateurs</option>
+	    	</select>
+	    	
+		   	<select disabled="disabled" name="select-native-1" id="classe_encour_desabled">
+		        <option value="">DSI31</option>
+		    </select>
+		
+	    	
+	    	<br />
+	    	<br />
+	    	<br />
+	    	<button >Associer </button>
+	    	
+	    	
+	    	</div>
+	    	
+    	</div>
+   
+    </body>
+</html>
